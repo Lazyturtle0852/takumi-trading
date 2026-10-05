@@ -4,7 +4,7 @@
 
 ゼミ生全員の「強み」をカードにし、お題に合わせて3人のチームを編成して競う。勝つ鍵は**誰が何を得意としているかを知っていること**。チームインテリジェンスの「知識」の観点、つまりメンバー同士がお互いの強みを把握している状態を、遊びながらつくることがねらい。
 
-- ルール説明ページ: [`site/index.html`](site/index.html)
+- ルール説明ページ: https://lazyturtle0852.github.io/takumi-trading/ （ソースは [`site/index.html`](site/index.html)）
 - ルール仕様: [`docs/rules.md`](docs/rules.md)
 - 事前フォームの設問: [`docs/form.md`](docs/form.md)
 - カードの仕様: [`docs/card-spec.md`](docs/card-spec.md)
@@ -79,4 +79,4 @@ Googleフォーム ──CSV──▶ AI（prompts/card-data.md） ──cards.j
     └── images/hero.jpg
 ```
 
-ルール説明ページはローカルで `python3 -m http.server -d site` を実行して開く。
+ルール説明ページは `site/` を変更して `main` にpushすると GitHub Pages に自動で反映される。ローカルでは `python3 -m http.server -d site` で確認できる。
