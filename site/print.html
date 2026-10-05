@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>カード印刷シート</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="card.css">
+<style>
+  /* A4縦に 63×88mm を 3×3。余白は左右10.5mm・上下16.5mm */
+  @page{size:A4;margin:0}
+  body{margin:0;background:#888}
+  .sheet{width:210mm;height:297mm;background:#fff;margin:10mm auto;position:relative;overflow:hidden;break-after:page}
+  .grid{position:absolute;left:10.5mm;top:16.5mm;display:grid;grid-template-columns:repeat(3,63mm);grid-template-rows:repeat(3,88mm)}
+  .grid .card{width:63mm}
+  .grid .tcard{border-radius:0;box-shadow:none}
+  /* トンボ（切り取り位置の目印） */
+  .mark{position:absolute;background:#000}
+  .mark.v{width:.15mm;height:6mm}
+  .mark.h{height:.15mm;width:6mm}
+  .help{font:14px/1.6 system-ui,sans-serif;color:#fff;text-align:center;padding:12px}
+  @media print{body{background:none}.sheet{margin:0}.help{display:none}}
+</style>
+</head>
+<body>
+<p class="help">ブラウザの印刷（⌘P）→ 用紙A4・倍率100%・余白なし・背景のグラフィックをオン で出力。<br>
+<code>?data=data/cards.json</code> を付けると本番データを読む（指定がなければダミー）。</p>
+<div id="sheets"></div>
+<script src="card.js"></script>
+<script src="sample-cards.js"></script>
+<script>
+const X0 = 10.5, Y0 = 16.5, W = 63, H = 88;
+
+function marks() {
+  let html = "";
+  for (let i = 0; i <= 3; i++) {
+    const x = X0 + W * i, y = Y0 + H * i;
+    html += `<span class="mark v" style="left:${x - .075}mm;top:${Y0 - 8}mm"></span>`;
+    html += `<span class="mark v" style="left:${x - .075}mm;top:${Y0 + H * 3 + 2}mm"></span>`;
+    html += `<span class="mark h" style="top:${y - .075}mm;left:${X0 - 8}mm"></span>`;
+    html += `<span class="mark h" style="top:${y - .075}mm;left:${X0 + W * 3 + 2}mm"></span>`;
+  }
+  return html;
+}
+
+async function load() {
+  const src = new URLSearchParams(location.search).get("data");
+  if (!src) return SAMPLE_CARDS;
+  const res = await fetch(src);
+  return (await res.json()).filter(c => c.id !== "SKIPPED");
+}
+
+load().then(cards => {
+  let out = "";
+  for (let i = 0; i < cards.length; i += 9) {
+    const page = cards.slice(i, i + 9).map(c => renderCard(c, cards.length)).join("");
+    out += `<section class="sheet">${marks()}<div class="grid">${page}</div></section>`;
+  }
+  document.getElementById("sheets").innerHTML = out;
+});
+</script>
+</body>
+</html>

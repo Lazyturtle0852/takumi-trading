@@ -5,12 +5,15 @@
 ## 共通スタイル（全員分で揃える）
 
 ```
-Trading card character illustration, anime-inspired flat illustration, vibrant colors,
-soft glowing aura in {COLOR} tones, simple gradient background, character centered,
-upper body, friendly and energetic mood, 16:10 aspect.
 {ILLUSTRATION_PROMPT}
+Anime-style trading card character illustration, clean bold lineart, cel shading,
+vivid saturated colors, {COLOR} as the main lighting color, upper body, confident smile,
+dynamic pose, detailed thematic background filling the whole frame.
 Absolutely no text, no labels, no letters, no numbers anywhere.
 ```
+
+- アスペクト比は 4:3 で生成する（カードの絵の枠に合わせて上下が少し切れる）
+- ダミーの見本（`site/images/sample/`）はこのスタイルで生成した
 
 - `{COLOR}` には、カードの `color` を英語にしたものを入れる（例：青 → blue）
 - `{ILLUSTRATION_PROMPT}` には、`cards.json` の `illustration_prompt` を入れる

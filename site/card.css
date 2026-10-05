@@ -1,0 +1,52 @@
+/* トレカ本体。.card の幅を決めれば中身は cqw で比例して縮む（画面表示も印刷も同じCSS） */
+.card{container-type:inline-size;width:100%;aspect-ratio:63/88}
+.tcard{
+  --c1:#5aa9ff; --c2:#1d4fa8; --gold:#d8b45a; --gold-d:#9c7a2a; --ink:#1d1d22; --label:#6b3a1f;
+  position:relative;width:100%;height:100%;border-radius:4.2cqw;padding:2.6cqw;
+  font-family:"Noto Sans JP",system-ui,sans-serif;color:var(--ink);line-height:1.35;
+  background:
+    linear-gradient(115deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 40%,rgba(255,255,255,.45) 60%,rgba(255,255,255,0) 100%),
+    linear-gradient(135deg,#ffd6f2,#cfe9ff 18%,#fff3bf 36%,#d3ffe0 54%,#ffd9c7 72%,#e2d6ff 90%);
+  box-shadow:0 2cqw 6cqw rgba(0,0,0,.35);
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;
+}
+.tcard .in{
+  height:100%;display:flex;flex-direction:column;gap:1.6cqw;border-radius:2.4cqw;padding:1.8cqw 2.2cqw 1.4cqw;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--c1) 38%,#f4f1ea) 0%,#efece4 30%,#e9e6de 100%);
+  border:.7cqw solid var(--gold);box-shadow:inset 0 0 0 .3cqw #fff8dc;
+}
+
+/* 名前と役割 */
+.tcard .hd{display:flex;align-items:flex-end;justify-content:space-between;gap:2cqw;padding:0 .6cqw}
+.tcard .nm{font-weight:900;font-size:6.6cqw;letter-spacing:-.02em;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tcard .rl{display:flex;align-items:center;gap:1.2cqw;flex-shrink:0}
+.tcard .rl small{font-size:2.6cqw;font-weight:900;color:#555}
+.tcard .rl b{font-size:3.9cqw;font-weight:900}
+.tcard .ic{width:5.4cqw;height:5.4cqw;border-radius:50%;display:inline-grid;place-items:center;font-size:3cqw;line-height:1;
+  background:radial-gradient(circle at 35% 30%,#fff,#ddd 70%);border:.35cqw solid #8a8a8a;flex-shrink:0}
+
+/* 絵 */
+.tcard .art{flex:1;min-height:0;border:.8cqw solid var(--gold);box-shadow:0 0 0 .3cqw var(--gold-d);border-radius:.6cqw;overflow:hidden;
+  background:radial-gradient(circle at 50% 40%,#fff,var(--c1) 75%);display:grid;place-items:center;font-size:20cqw}
+.tcard .art img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* 強み・助けられる・相性 */
+.tcard .info{background:rgba(255,255,255,.72);border:.5cqw solid var(--gold);border-radius:1.2cqw;padding:1cqw 1.4cqw;display:grid;gap:.7cqw}
+.tcard .row{display:grid;grid-template-columns:13cqw 1fr;gap:1.6cqw;align-items:start;font-size:3.05cqw}
+.tcard .row+.row{border-top:.25cqw solid rgba(0,0,0,.12);padding-top:.7cqw}
+.tcard .lb{background:var(--label);color:#fff;font-weight:900;font-size:2.7cqw;border-radius:1.4cqw;text-align:center;padding:.15cqw 0}
+.tcard .row ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;column-gap:2.4cqw}
+.tcard .row li::before{content:"●";font-size:.8em;margin-right:.6cqw}
+
+/* 技 */
+.tcard .mv{background:rgba(255,255,255,.72);border:.5cqw solid var(--gold);border-radius:1.2cqw;padding:.6cqw 1.6cqw}
+.tcard .m+.m{border-top:.25cqw solid rgba(0,0,0,.12)}
+.tcard .m{padding:.7cqw 0}
+.tcard .mh{display:flex;align-items:center;gap:1.4cqw}
+.tcard .mh b{flex:1;text-align:center;font-weight:900;font-size:4.3cqw;line-height:1.2;padding-right:5.4cqw}
+.tcard .m p{margin:.3cqw 0 0;font-size:2.95cqw;line-height:1.38}
+
+/* 下の帯 */
+.tcard .ft{display:flex;align-items:center;justify-content:space-between;gap:2cqw;font-size:2.3cqw;color:#444;padding:0 .6cqw}
+.tcard .ft .no{font-weight:900;font-style:italic;flex-shrink:0}
+.tcard .ft .cp{flex:1;text-align:center;font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

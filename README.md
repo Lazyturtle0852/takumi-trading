@@ -40,7 +40,7 @@ Googleフォーム ──CSV──▶ AI（prompts/card-data.md） ──cards.j
 2. CSVと [`prompts/card-data.md`](prompts/card-data.md) をAIに渡し、カード用のJSON（`cards.json`）を作る
 3. JSONの `review_flags` を人が確認して直す
 4. 写真がない人のイラストを [`prompts/illustration.md`](prompts/illustration.md) で生成する
-5. HTMLテンプレートに流し込み、63×88mm・A4に9枚の印刷用PDFを書き出す（テンプレートは未実装）
+5. `data/cards.json` を `site/data/` に置き、`site/print.html?data=data/cards.json` をブラウザで開いて印刷する（A4・倍率100%・余白なし・背景のグラフィックをオン）。`site/data/` もGitには入らない
 
 ## スケジュール
 
@@ -76,7 +76,10 @@ Googleフォーム ──CSV──▶ AI（prompts/card-data.md） ──cards.j
 │   └── dummy_responses.csv   架空の回答（動作確認用）
 └── site/
     ├── index.html        ルール説明ページ
-    └── images/hero.jpg
+    ├── print.html        印刷シート（A4に9枚・トンボ付き）
+    ├── card.css / card.js  カードのテンプレート（表示・印刷で共用）
+    ├── sample-cards.js   ダミーのカードデータ
+    └── images/           タイトル画像・ダミーのイラスト
 ```
 
 ルール説明ページは `site/` を変更して `main` にpushすると GitHub Pages に自動で反映される。ローカルでは `python3 -m http.server -d site` で確認できる。

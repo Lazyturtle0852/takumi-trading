@@ -93,22 +93,8 @@ h3{font-size:18px;margin:0 0 8px}
 .order .p1{background:#2b4a88} .order .p2{background:#7a2b3c}
 
 /* cards */
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.tcard{aspect-ratio:63/88;border-radius:14px;padding:10px;background:linear-gradient(160deg,var(--c1),var(--c2));box-shadow:0 10px 30px rgba(0,0,0,.4);display:flex;flex-direction:column;color:#1b1b1b}
-.tcard .inner{background:#fbf8ef;border-radius:8px;flex:1;display:flex;flex-direction:column;padding:10px;gap:6px;font-size:12px;line-height:1.5}
-.tcard .head{display:flex;justify-content:space-between;align-items:baseline}
-.tcard .name{font-weight:900;font-size:16px}
-.tcard .role{font-size:11px;font-weight:700;color:#555}
-.tcard .art{aspect-ratio:16/10;border-radius:6px;background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.9),var(--c1) 70%);display:grid;place-items:center;font-size:44px;border:2px solid rgba(0,0,0,.15)}
-.tcard .catch{font-style:italic;color:#555;font-size:11px}
-.tcard .tags .tag{background:#fff;font-size:10.5px;padding:0 8px}
-.tcard .str{font-size:11px}
-.tcard .str b{background:#1b1b1b;color:#fbf8ef;border-radius:4px;padding:0 5px;margin-right:4px;font-size:10px}
-.tcard .move{border-top:1px solid #ddd;padding-top:4px}
-.tcard .move b{display:block;font-size:12.5px}
-.tcard .aisho{margin-top:auto;font-size:10.5px;font-weight:700;background:#ffe9a8;border-radius:6px;padding:4px 6px}
-.tcard .help{font-size:10.5px;background:#efe9d8;border-radius:6px;padding:4px 6px}
-
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;align-items:start}
+.cards .card{max-width:340px;margin:0 auto}
 /* aisho */
 table{width:100%;border-collapse:collapse;font-size:15px}
 th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
@@ -146,10 +132,11 @@ footer{padding:32px 0 48px;color:var(--muted);font-size:13px;text-align:center}
   .hero{min-height:440px}
 }
 </style>
+<link rel="stylesheet" href="card.css">
 </head>
 <body>
 
-<div class="draft-banner">ルール案 v0.4（仮）── 合宿 10/13 に向けて調整中</div>
+<div class="draft-banner">ルール案 v0.5（仮）── 合宿 10/13 に向けて調整中</div>
 
 <header class="hero">
   <img src="images/hero.jpg" alt="">
@@ -261,39 +248,9 @@ footer{padding:32px 0 48px;color:var(--muted);font-size:13px;text-align:center}
 <section id="cards">
   <div class="wrap">
     <h2><span class="num">04</span>カードの見本（ダミー）</h2>
-    <p class="sub">63×88mm・片面印刷。事前フォームの回答から自動生成する。</p>
-    <div class="cards">
-      <div class="tcard" style="--c1:#5aa9ff;--c2:#1d4fa8"><div class="inner">
-        <div class="head"><span class="name">グラフの魔術師</span><span class="role">参謀</span></div>
-        <div class="art">📊</div>
-        <div class="catch">「とりあえず可視化してから考えよう」</div>
-        <div class="tags"><span class="tag t-stat">統計</span><span class="tag t-design">デザイン</span></div>
-        <div class="str"><b>強み</b> データの整理／図解／粘り強さ</div>
-        <div class="move"><b>技：一目瞭然プロット</b>散らかったデータを一枚の図にまとめ、議論を3分で収束させる。</div>
-        <div class="aisho">🤝 相性◎：アイデアを次々出す人と組むと、それを形にして輝く</div>
-        <div class="help">🙋 助けられること：アンケート集計、グラフの見せ方</div>
-      </div></div>
-      <div class="tcard" style="--c1:#4fd1a1;--c2:#17795a"><div class="inner">
-        <div class="head"><span class="name">深夜のビルダー</span><span class="role">実行者</span></div>
-        <div class="art">💻</div>
-        <div class="catch">「動くものを見せたほうが早い」</div>
-        <div class="tags"><span class="tag t-prog">プログラミング</span><span class="tag t-video">動画編集</span></div>
-        <div class="str"><b>強み</b> 手を動かす速さ／新しい技術への好奇心</div>
-        <div class="move"><b>技：一晩プロトタイプ</b>アイデアを翌朝までに触れるデモにする。</div>
-        <div class="aisho">🤝 相性◎：見た目にこだわれる人と組むと、デモの完成度が跳ね上がる</div>
-        <div class="help">🙋 助けられること：Webアプリ、Pythonの環境構築</div>
-      </div></div>
-      <div class="tcard" style="--c1:#ff8f8f;--c2:#b6324a"><div class="inner">
-        <div class="head"><span class="name">ことばの鍛冶屋</span><span class="role">クリエイター</span></div>
-        <div class="art">✍️</div>
-        <div class="catch">「その一文、もっと短くできる」</div>
-        <div class="tags"><span class="tag t-edit">文章添削</span><span class="tag t-eng">英語</span><span class="tag t-pres">プレゼン</span></div>
-        <div class="str"><b>強み</b> 言葉選び／英語での発信／構成力</div>
-        <div class="move"><b>技：赤ペン一閃</b>冗長な原稿を半分の長さにし、伝わる文章に打ち直す。</div>
-        <div class="aisho">🤝 相性◎：データや調査の材料を持っている人と組むと、最強の原稿が書ける</div>
-        <div class="help">🙋 助けられること：英語abstract、発表原稿の推敲</div>
-      </div></div>
-    </div>
+    <p class="sub">63×88mm・片面印刷。事前フォームの回答から自動生成する。イラストもダミー（AI生成）。</p>
+    <div class="cards" id="card-list"></div>
+    <p class="note">※ 技は最大3つ。1つの分野に偏らず、その人のいろんな強みが見えるようにする。印刷用レイアウトは <a href="print.html">print.html</a>。</p>
   </div>
 </section>
 
@@ -368,9 +325,12 @@ footer{padding:32px 0 48px;color:var(--muted);font-size:13px;text-align:center}
 
 </main>
 
-<footer>インテリジェントなチームを作れ！ ── たくみ研 SBC合宿 2026 ／ ルール案 v0.4</footer>
+<footer>インテリジェントなチームを作れ！ ── たくみ研 SBC合宿 2026 ／ ルール案 v0.5</footer>
 
+<script src="card.js"></script>
+<script src="sample-cards.js"></script>
 <script>
+document.getElementById("card-list").innerHTML = SAMPLE_CARDS.map(c => renderCard(c, SAMPLE_CARDS.length)).join("");
 const ODAI = [
   ["ORFのブースを3日で準備せよ","展示物・ポスター・デモ・当日の説明まで、全部ゼロから。"],
   ["学会締切まで48時間、英語論文がまだ半分","しかも分析の図もまだ仮のまま。"],
