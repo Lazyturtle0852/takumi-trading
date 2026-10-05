@@ -37,8 +37,8 @@ Googleフォーム ──CSV──▶ AI（prompts/card-data.md） ──cards.j
 ```
 
 1. 事前フォーム（[`docs/form.md`](docs/form.md)）で回答を集め、スプレッドシートからCSVで書き出す
-2. CSVと [`prompts/card-data.md`](prompts/card-data.md) をAIに渡し、カード用のJSON（`cards.json`）を作る
-3. JSONの `review_flags` を人が確認して直す
+2. CSVと [`prompts/card-data.md`](prompts/card-data.md) をAIに渡し、カード用のJSON（`cards.json`）を作る。列名や設問が変わっても、AIが中身の意味から対応付ける
+3. JSONの `column_mapping`（列の対応付け）、`missing_fields`、各カードの `review_flags` を人が確認して直す
 4. 写真がない人のイラストを [`prompts/illustration.md`](prompts/illustration.md) で生成する
 5. `data/cards.json` を `site/data/` に置き、`site/print.html?data=data/cards.json` をブラウザで開いて印刷する（A4・倍率100%・余白なし・背景のグラフィックをオン）。`site/data/` もGitには入らない
 

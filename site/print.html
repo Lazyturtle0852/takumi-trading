@@ -49,7 +49,8 @@ async function load() {
   const src = new URLSearchParams(location.search).get("data");
   if (!src) return SAMPLE_CARDS;
   const res = await fetch(src);
-  return (await res.json()).filter(c => c.id !== "SKIPPED");
+  const json = await res.json();
+  return Array.isArray(json) ? json : json.cards;  // プロンプトの出力は { cards: [...] }
 }
 
 load().then(cards => {
