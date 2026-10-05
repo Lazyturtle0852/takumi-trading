@@ -1,0 +1,5 @@
+# 個人の回答・写真・生成物は入れない
+data/
+output/
+*.local.*
+.DS_Store

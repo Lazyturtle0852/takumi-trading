@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>インテリジェントなチームを作れ！</title>
+<meta name="description" content="SBC合宿 チームインテリジェンス輪読アクティビティ ルール説明（仮）">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b1020; --bg2:#121a33; --panel:#18223f; --line:#2a3762;
+  --text:#e9edf8; --muted:#9aa6c7; --gold:#f5c542; --gold2:#ffdf7e;
+  --red:#ff6b6b; --blue:#5aa9ff; --green:#4fd1a1; --purple:#b48cff;
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Noto Sans JP",system-ui,sans-serif;line-height:1.75;font-size:16px}
+a{color:var(--gold2)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+.draft-banner{background:var(--gold);color:#1a1300;text-align:center;font-weight:700;font-size:13px;padding:6px 16px}
+
+/* hero */
+.hero{position:relative;min-height:520px;display:flex;align-items:flex-end;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.75}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,16,32,.1) 0%,rgba(11,16,32,.55) 55%,var(--bg) 100%)}
+.hero .wrap{position:relative;z-index:1;padding-bottom:48px;width:100%}
+.eyebrow{display:inline-block;border:1px solid var(--gold);color:var(--gold2);border-radius:999px;padding:2px 14px;font-size:13px;font-weight:700;letter-spacing:.08em;background:rgba(11,16,32,.6)}
+h1{font-family:"Dela Gothic One",sans-serif;font-weight:400;font-size:clamp(34px,7vw,72px);line-height:1.15;margin:14px 0 10px;
+   background:linear-gradient(180deg,#fff 0%,var(--gold2) 60%,var(--gold) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+   filter:drop-shadow(0 4px 18px rgba(245,197,66,.35))}
+.lead{font-size:clamp(15px,2.2vw,18px);color:#d6dcf0;max-width:680px;margin:0}
+
+/* sections */
+section{padding:56px 0;border-bottom:1px solid var(--line)}
+h2{font-family:"Dela Gothic One",sans-serif;font-weight:400;font-size:clamp(22px,3.6vw,30px);margin:0 0 6px;display:flex;align-items:center;gap:12px}
+h2 .num{font-family:"Noto Sans JP";font-weight:900;font-size:13px;color:#1a1300;background:var(--gold);border-radius:6px;padding:2px 8px}
+.sub{color:var(--muted);margin:0 0 24px}
+h3{font-size:18px;margin:0 0 8px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.panel p{margin:0}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:1px 10px;border-radius:999px;border:1px solid currentColor;margin:2px 4px 2px 0;white-space:nowrap}
+.t-stat{color:var(--blue)} .t-design{color:#ff8fd0} .t-prog{color:var(--green)} .t-eng{color:#7fe3ff}
+.t-edit{color:#c9b8ff} .t-pres{color:var(--red)} .t-plan{color:var(--gold2)} .t-res{color:#9be37f} .t-video{color:#ffa65c}
+
+/* concept */
+.concept{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.concept .panel b{color:var(--gold2)}
+.big-quote{font-size:clamp(18px,2.8vw,22px);font-weight:700;border-left:4px solid var(--gold);padding:4px 0 4px 16px;margin:0 0 24px}
+
+/* timeline */
+.timeline{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.timeline li{display:grid;grid-template-columns:92px 1fr;gap:16px;align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+.timeline .time{font-weight:900;color:var(--gold2);font-variant-numeric:tabular-nums}
+.timeline .what b{display:block}
+.timeline .what span{color:var(--muted);font-size:14px}
+
+/* bracket */
+.bracket-wrap{overflow-x:auto;padding-bottom:8px}
+.bracket{display:grid;grid-template-columns:repeat(3,minmax(190px,1fr));gap:28px;min-width:640px}
+.round h4{margin:0 0 12px;font-size:13px;color:var(--muted);letter-spacing:.06em}
+.round{display:flex;flex-direction:column}
+.matches{display:flex;flex-direction:column;justify-content:space-around;flex:1;gap:14px}
+.match{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;position:relative}
+.match .lbl{position:absolute;right:8px;top:6px;font-size:11px;color:var(--muted);font-weight:700}
+.slot{padding:8px 12px;font-weight:700;font-size:14px}
+.slot+.slot{border-top:1px dashed var(--line)}
+.slot.seed{color:var(--gold2)}
+.slot.tbd{color:var(--muted);font-weight:500}
+.final .match{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 0 24px rgba(245,197,66,.25)}
+.note{font-size:14px;color:var(--muted);margin-top:16px}
+
+/* steps */
+.steps{counter-reset:s;display:grid;gap:14px}
+.step{display:grid;grid-template-columns:56px 1fr;gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.step::before{counter-increment:s;content:counter(s);width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--gold),#d99a1c);color:#1a1300;
+  font-weight:900;font-size:22px;display:grid;place-items:center}
+.step .meta{font-size:12px;font-weight:700;color:var(--gold2);letter-spacing:.06em}
+.step h3{margin:2px 0 6px}
+.step p{margin:0;color:#d6dcf0}
+.step .eg{margin-top:8px;font-size:14px;color:var(--muted)}
+.pill{display:inline-block;font-size:11px;font-weight:900;border-radius:6px;padding:1px 7px;margin-left:6px;vertical-align:2px}
+.pill.d{background:#2b4a88;color:#cfe0ff} .pill.a{background:#7a2b3c;color:#ffd6de} .pill.c{background:#265c48;color:#cff5e5}
+
+/* draft order */
+.order{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.order span{font-size:13px;font-weight:700;padding:3px 10px;border-radius:8px}
+.order .p1{background:#2b4a88} .order .p2{background:#7a2b3c}
+
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.tcard{aspect-ratio:63/88;border-radius:14px;padding:10px;background:linear-gradient(160deg,var(--c1),var(--c2));box-shadow:0 10px 30px rgba(0,0,0,.4);display:flex;flex-direction:column;color:#1b1b1b}
+.tcard .inner{background:#fbf8ef;border-radius:8px;flex:1;display:flex;flex-direction:column;padding:10px;gap:6px;font-size:12px;line-height:1.5}
+.tcard .head{display:flex;justify-content:space-between;align-items:baseline}
+.tcard .name{font-weight:900;font-size:16px}
+.tcard .role{font-size:11px;font-weight:700;color:#555}
+.tcard .art{aspect-ratio:16/10;border-radius:6px;background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.9),var(--c1) 70%);display:grid;place-items:center;font-size:44px;border:2px solid rgba(0,0,0,.15)}
+.tcard .catch{font-style:italic;color:#555;font-size:11px}
+.tcard .tags .tag{background:#fff;font-size:10.5px;padding:0 8px}
+.tcard .str{font-size:11px}
+.tcard .str b{background:#1b1b1b;color:#fbf8ef;border-radius:4px;padding:0 5px;margin-right:4px;font-size:10px}
+.tcard .move{border-top:1px solid #ddd;padding-top:4px}
+.tcard .move b{display:block;font-size:12.5px}
+.tcard .aisho{margin-top:auto;font-size:10.5px;font-weight:700;background:#ffe9a8;border-radius:6px;padding:4px 6px}
+.tcard .help{font-size:10.5px;background:#efe9d8;border-radius:6px;padding:4px 6px}
+
+/* aisho */
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--muted);letter-spacing:.06em}
+td.name{font-weight:900;color:var(--gold2);white-space:nowrap}
+.table-wrap{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
+
+/* odai */
+.gacha{display:grid;gap:16px;grid-template-columns:1fr;justify-items:center;text-align:center}
+.odai-card{width:min(100%,560px);min-height:180px;border-radius:18px;padding:26px 24px;background:linear-gradient(160deg,#20305c,#151d39);border:2px solid var(--gold);
+  box-shadow:0 0 40px rgba(245,197,66,.18);display:flex;flex-direction:column;justify-content:center;gap:10px}
+.odai-card .k{font-size:12px;letter-spacing:.2em;color:var(--gold2);font-weight:900}
+.odai-card .t{font-size:clamp(20px,3.4vw,28px);font-weight:900;line-height:1.4}
+.odai-card .d{color:var(--muted);font-size:14px}
+.odai-card.spin{animation:pop .45s ease}
+@keyframes pop{0%{transform:scale(.94) rotateY(70deg);opacity:.2}100%{transform:none;opacity:1}}
+button.draw{font:inherit;font-weight:900;font-size:17px;border:0;border-radius:999px;padding:12px 34px;cursor:pointer;color:#1a1300;
+  background:linear-gradient(180deg,var(--gold2),var(--gold));box-shadow:0 6px 0 #b8861a}
+button.draw:active{transform:translateY(3px);box-shadow:0 3px 0 #b8861a}
+.odai-list{columns:2 280px;column-gap:24px;margin:24px 0 0;padding-left:20px;text-align:left;color:#d6dcf0}
+.odai-list li{break-inside:avoid;margin-bottom:6px}
+
+.karuta{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.karuta div{background:#f3ead2;color:#3a2a10;border-radius:10px;padding:14px 16px;font-weight:700;border:3px double #b48a3a}
+.karuta small{display:block;font-weight:500;color:#7a6a4a;margin-top:4px}
+
+ul.check{margin:0;padding-left:20px}
+ul.check li{margin-bottom:6px}
+.open li{color:#d6dcf0}
+footer{padding:32px 0 48px;color:var(--muted);font-size:13px;text-align:center}
+
+@media (max-width:560px){
+  .timeline li{grid-template-columns:1fr;gap:2px}
+  .step{grid-template-columns:1fr}
+  .hero{min-height:440px}
+}
+</style>
+</head>
+<body>
+
+<div class="draft-banner">ルール案 v0.4（仮）── 合宿 10/13 に向けて調整中</div>
+
+<header class="hero">
+  <img src="images/hero.jpg" alt="">
+  <div class="wrap">
+    <span class="eyebrow">SBC合宿 2026 ／ チームインテリジェンス輪読アクティビティ</span>
+    <h1>インテリジェントな<br>チームを作れ！</h1>
+    <p class="lead">ゼミ生全員の「強み」がトレーディングカードになった。お題に合わせて最強のチームを編成し、なぜそのチームなのかを語り切れ。勝つ鍵は、<b>誰が何を得意としているかを知っていること</b>。</p>
+  </div>
+</header>
+
+<main>
+
+<section id="why">
+  <div class="wrap">
+    <h2><span class="num">00</span>ねらい</h2>
+    <p class="sub">チームインテリジェンスの「知識」──メンバー同士がお互いの強みを把握していること</p>
+    <p class="big-quote">「〇〇のことなら△△さんに聞けばいい」を、遊びながら全員の頭に入れる。</p>
+    <div class="concept">
+      <div class="panel"><h3>📇 知る</h3><p>事前フォームの回答から、全員分のカードを生成。強み・得意ジャンル・オリジナル技が一枚にまとまる。</p></div>
+      <div class="panel"><h3>🧩 組む</h3><p>お題に合わせ、配られた手札から2分で3人のチームを作る。<b>強みを読み込んでいるほど有利</b>。</p></div>
+      <div class="panel"><h3>🎤 語る</h3><p>「なぜこの3人か」をプレゼン。観戦している全員が、選ばれた人の強みを一緒に知る。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="flow">
+  <div class="wrap">
+    <h2><span class="num">01</span>当日の流れ（60分）</h2>
+    <p class="sub">プレイヤーは新規生7人のトーナメント。ほかの全員は観戦＆審査員。</p>
+    <ol class="timeline">
+      <li><div class="time">0:00</div><div class="what"><b>ルール説明・シード決め</b><span>新規生7人でじゃんけん。勝った1人がシード。</span></div></li>
+      <li><div class="time">0:05</div><div class="what"><b>1回戦（3試合）</b><span>1試合約6分 × 3（入れ替え込みで8分枠）。シードの人は観戦。</span></div></li>
+      <li><div class="time">0:29</div><div class="what"><b>準決勝（2試合）</b><span>1回戦の勝者3人＋シード。</span></div></li>
+      <li><div class="time">0:45</div><div class="what"><b>決勝</b><span>ルールは他の試合と同じ。</span></div></li>
+      <li><div class="time">0:53</div><div class="what"><b>表彰・振り返り</b><span>優勝者を表彰。全員が「今日初めて知った誰かの強み」を1つ言う。</span></div></li>
+    </ol>
+  </div>
+</section>
+
+<section id="bracket">
+  <div class="wrap">
+    <h2><span class="num">02</span>トーナメント表</h2>
+    <p class="sub">7人・シード1枠。全試合をみんなで観戦する。</p>
+    <div class="bracket-wrap">
+      <div class="bracket">
+        <div class="round">
+          <h4>1回戦</h4>
+          <div class="matches">
+            <div class="match"><span class="lbl">第1試合</span><div class="slot">新規生 A</div><div class="slot">新規生 B</div></div>
+            <div class="match"><span class="lbl">第2試合</span><div class="slot">新規生 C</div><div class="slot">新規生 D</div></div>
+            <div class="match"><span class="lbl">第3試合</span><div class="slot">新規生 E</div><div class="slot">新規生 F</div></div>
+            <div class="match"><span class="lbl">シード</span><div class="slot seed">★ 新規生 G（じゃんけん勝者）</div></div>
+          </div>
+        </div>
+        <div class="round">
+          <h4>準決勝</h4>
+          <div class="matches">
+            <div class="match"><span class="lbl">第4試合</span><div class="slot tbd">第1試合 勝者</div><div class="slot tbd">第2試合 勝者</div></div>
+            <div class="match"><span class="lbl">第5試合</span><div class="slot tbd">第3試合 勝者</div><div class="slot seed">★ シード</div></div>
+          </div>
+        </div>
+        <div class="round final">
+          <h4>決勝</h4>
+          <div class="matches">
+            <div class="match"><span class="lbl">第6試合</span><div class="slot tbd">第4試合 勝者</div><div class="slot tbd">第5試合 勝者</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="note">※ 全6試合 × 8分枠（実質6分＋入れ替え）。押したら決勝以外のプレゼン時間を30秒に短縮して調整。</p>
+  </div>
+</section>
+
+<section id="match">
+  <div class="wrap">
+    <h2><span class="num">03</span>1試合の流れ（約6分）</h2>
+    <p class="sub">ルールは「山札を半分に分けて、2分で3人を選ぶ」だけ。</p>
+    <div class="steps">
+      <div class="step"><div>
+        <div class="meta">30秒</div>
+        <h3>お題を引く</h3>
+        <p>お題カードをランダムに1枚めくる（下のガチャでも可）。会場全員に読み上げる。</p>
+      </div></div>
+      <div class="step"><div>
+        <div class="meta">30秒</div>
+        <h3>山札を半分に分ける</h3>
+        <p>全員分のカードを1つの山札にまとめてシャッフルし、<b>半分ずつ</b>2人に配る（30枚なら15枚ずつ）。対戦する2人自身のカードを山札に入れるかは当日決める。</p>
+      </div></div>
+      <div class="step"><div>
+        <div class="meta">2分</div>
+        <h3>3人のチームインテリジェンスを作る</h3>
+        <p>自分の手札だけから3枚を選び、チーム名を決める。強み・技・相性◎を<b>速く深く読めた方が有利</b>。普段から誰が何を得意か知っていれば、読む前に候補が浮かぶ。</p>
+      </div></div>
+      <div class="step"><div>
+        <div class="meta">45秒 × 2</div>
+        <h3>プレゼン</h3>
+        <p>選んだ3枚を<b>ホワイトボードにマグネットで貼り</b>、選ばれた3人はその場で前に立つ。「チーム名」「誰が何をするか」「なぜこの3人ならお題を達成できるか」を語る。本人から一言コメント（「それ得意です！」「実はそれ苦手…」）も可。</p>
+      </div></div>
+      <div class="step"><div>
+        <div class="meta">1分</div>
+        <h3>観客投票 ＋ 相性ボーナス</h3>
+        <p>観戦者全員が、より「インテリジェントなチーム」だと思った方に挙手で1票。プレゼンで主張した<b>相性◎が成立していれば、1つにつき＋2票</b>。合計が多い方が勝ち上がり。</p>
+        <p class="eg">成立の判定は、そのカードの<b>本人</b>が会場で「OK！」を出す。本人不在や意見が割れたときは<b>たくみさんが最終判断</b>。覚えるルール表はなし。</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section id="cards">
+  <div class="wrap">
+    <h2><span class="num">04</span>カードの見本（ダミー）</h2>
+    <p class="sub">63×88mm・片面印刷。事前フォームの回答から自動生成する。</p>
+    <div class="cards">
+      <div class="tcard" style="--c1:#5aa9ff;--c2:#1d4fa8"><div class="inner">
+        <div class="head"><span class="name">グラフの魔術師</span><span class="role">参謀</span></div>
+        <div class="art">📊</div>
+        <div class="catch">「とりあえず可視化してから考えよう」</div>
+        <div class="tags"><span class="tag t-stat">統計</span><span class="tag t-design">デザイン</span></div>
+        <div class="str"><b>強み</b> データの整理／図解／粘り強さ</div>
+        <div class="move"><b>技：一目瞭然プロット</b>散らかったデータを一枚の図にまとめ、議論を3分で収束させる。</div>
+        <div class="aisho">🤝 相性◎：アイデアを次々出す人と組むと、それを形にして輝く</div>
+        <div class="help">🙋 助けられること：アンケート集計、グラフの見せ方</div>
+      </div></div>
+      <div class="tcard" style="--c1:#4fd1a1;--c2:#17795a"><div class="inner">
+        <div class="head"><span class="name">深夜のビルダー</span><span class="role">実行者</span></div>
+        <div class="art">💻</div>
+        <div class="catch">「動くものを見せたほうが早い」</div>
+        <div class="tags"><span class="tag t-prog">プログラミング</span><span class="tag t-video">動画編集</span></div>
+        <div class="str"><b>強み</b> 手を動かす速さ／新しい技術への好奇心</div>
+        <div class="move"><b>技：一晩プロトタイプ</b>アイデアを翌朝までに触れるデモにする。</div>
+        <div class="aisho">🤝 相性◎：見た目にこだわれる人と組むと、デモの完成度が跳ね上がる</div>
+        <div class="help">🙋 助けられること：Webアプリ、Pythonの環境構築</div>
+      </div></div>
+      <div class="tcard" style="--c1:#ff8f8f;--c2:#b6324a"><div class="inner">
+        <div class="head"><span class="name">ことばの鍛冶屋</span><span class="role">クリエイター</span></div>
+        <div class="art">✍️</div>
+        <div class="catch">「その一文、もっと短くできる」</div>
+        <div class="tags"><span class="tag t-edit">文章添削</span><span class="tag t-eng">英語</span><span class="tag t-pres">プレゼン</span></div>
+        <div class="str"><b>強み</b> 言葉選び／英語での発信／構成力</div>
+        <div class="move"><b>技：赤ペン一閃</b>冗長な原稿を半分の長さにし、伝わる文章に打ち直す。</div>
+        <div class="aisho">🤝 相性◎：データや調査の材料を持っている人と組むと、最強の原稿が書ける</div>
+        <div class="help">🙋 助けられること：英語abstract、発表原稿の推敲</div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section id="synergy">
+  <div class="wrap">
+    <h2><span class="num">05</span>相性◎ボーナス</h2>
+    <p class="sub">覚えるシナジー表はなし。相性は<b>カードそのもの</b>に書いてある。</p>
+    <div class="grid g2">
+      <div class="panel">
+        <h3>🤝 カードの「相性◎」欄</h3>
+        <p>全員のカードに「こんな人と一緒だとパフォーマンスが上がる！」が一文で書かれている（事前フォームで本人が回答）。</p>
+        <p class="eg" style="margin-top:8px;color:var(--muted);font-size:14px">例：「アイデアを次々出す人と組むと、それを形にして輝く」</p>
+      </div>
+      <div class="panel">
+        <h3>✅ 成立させるには</h3>
+        <p>2分の編成中に相性欄を読み、条件に合う人を同じチームに入れる。プレゼンで「AさんとBさんは相性◎、なぜならBさんは〇〇だから」と<b>根拠つきで主張</b>し、カードの本人がOKを出せば成立。1つにつき＋2票。</p>
+      </div>
+    </div>
+    <p class="note">※ 相性の条件は、名前ではなく「〇〇が得意な人」「〇〇な性格の人」のように書いてもらう。他のカードの強み欄と照らし合わせて主張できるのがポイント。</p>
+  </div>
+</section>
+
+<section id="odai">
+  <div class="wrap">
+    <h2><span class="num">06</span>お題ガチャ</h2>
+    <p class="sub">試合ごとにランダムで1枚。ゼミで実際に起こりそうな場面を中心に。</p>
+    <div class="gacha">
+      <div class="odai-card" id="odai" aria-live="polite">
+        <div class="k">MISSION</div>
+        <div class="t">ボタンを押してお題を引こう</div>
+        <div class="d">&nbsp;</div>
+      </div>
+      <button class="draw" id="draw" type="button">お題を引く</button>
+    </div>
+    <ul class="odai-list" id="odai-list"></ul>
+  </div>
+</section>
+
+<section id="prep">
+  <div class="wrap">
+    <h2><span class="num">07</span>運営メモ</h2>
+    <div class="grid g2">
+      <div class="panel">
+        <h3>準備物</h3>
+        <ul class="check">
+          <li>人物カード 全員分 × 1セット（A4普通紙・片面・9枚/枚 → 約4枚）。試合ごとに回収してシャッフル。予備にもう1セット</li>
+          <li>お題カード 約20枚（またはこのページのガチャを投影）</li>
+          <li>ホワイトボード＋マグネット（1試合で6個、予備込みで10個）</li>
+          <li>お題を映すプロジェクター（このページのガチャを使う場合）</li>
+          <li>トーナメント表（ホワイトボードの端）、2分タイマー</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>スケジュール</h3>
+        <ul class="check">
+          <li>10/6（火）事前フォーム配布</li>
+          <li>10/9（金）フォーム締切</li>
+          <li>10/10〜12 カード生成・確認・印刷・カット</li>
+          <li>10/13（火）合宿本番</li>
+          <li>未回答者のカードは当日その場で手書き</li>
+        </ul>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:16px">
+      <h3>未決事項</h3>
+      <ul class="check open">
+        <li>対戦する2人自身のカードを山札に入れるか（当日決定）</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>インテリジェントなチームを作れ！ ── たくみ研 SBC合宿 2026 ／ ルール案 v0.4</footer>
+
+<script>
+const ODAI = [
+  ["ORFのブースを3日で準備せよ","展示物・ポスター・デモ・当日の説明まで、全部ゼロから。"],
+  ["学会締切まで48時間、英語論文がまだ半分","しかも分析の図もまだ仮のまま。"],
+  ["新歓で新入生を10人確保せよ","説明会・SNS発信・個別フォローまで。"],
+  ["商社の役員に研究を3分でピッチせよ","専門外の人に価値を伝え、共同研究の約束を取り付ける。"],
+  ["ハッカソン48時間で優勝せよ","テーマは当日発表。動くプロダクトと発表が必要。"],
+  ["ゼミ紹介動画を1週間で作れ","企画・撮影・編集・公開まで。"],
+  ["卒論の中間発表が明日。まだ何もない","テーマの整理から、スライドと発表まで一晩で。"],
+  ["100人規模のアンケート調査を設計・分析せよ","設問設計、配布、集計、結果報告まで。"],
+  ["海外大学のゼミと合同オンラインワークショップを開け","英語での進行と、当日のファシリテーション。"],
+  ["ゼミのWebサイトを全面リニューアルせよ","中身の取材・文章・デザイン・実装まで。"],
+  ["合宿の行き先と企画をゼロから決めて実行せよ","予算・移動・コンテンツ・当日の運営。"],
+  ["研究室の知見をまとめた「ゼミ生ハンドブック」を作れ","聞き取り・整理・執筆・デザイン。"]
+];
+const card = document.getElementById("odai");
+const list = document.getElementById("odai-list");
+ODAI.forEach(([t]) => { const li = document.createElement("li"); li.textContent = t; list.appendChild(li); });
+let last = -1;
+document.getElementById("draw").addEventListener("click", () => {
+  let i; do { i = Math.floor(Math.random() * ODAI.length); } while (i === last && ODAI.length > 1);
+  last = i;
+  card.querySelector(".t").textContent = ODAI[i][0];
+  card.querySelector(".d").textContent = ODAI[i][1];
+  card.classList.remove("spin"); void card.offsetWidth; card.classList.add("spin");
+});
+</script>
+</body>
+</html>
