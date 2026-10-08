@@ -298,7 +298,6 @@ window.renderBack = function (c, index, layout) {
     <rect y="764" width="${W}" height="75" fill="#fdf3dc" opacity=".94"/>
     <!-- 研究会ロゴの青 -->
     <g class="lab" text-anchor="middle" font-size="60">
-      <text x="${W / 2 + 3}" y="823" fill="#14294d" textLength="540" lengthAdjust="spacingAndGlyphs">Shimizu Takumi Lab.</text>
       <text x="${W / 2}" y="820" fill="#0176a8" textLength="540" lengthAdjust="spacingAndGlyphs">Shimizu Takumi Lab.</text>
     </g>
     ${L.ribbon ? L.ribbon(size, jp) : ""}
