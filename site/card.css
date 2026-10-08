@@ -50,3 +50,8 @@
 .tcard .ft{display:flex;align-items:center;justify-content:space-between;gap:2cqw;font-size:2.3cqw;color:#444;padding:0 .6cqw}
 .tcard .ft .no{font-weight:900;font-style:italic;flex-shrink:0}
 .tcard .ft .cp{flex:1;text-align:center;font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* 裏面（card-back.js）。Canvaの見本の Roca One の代わりに Fraunces（太字・丸み）、日本語は Mochiy Pop One */
+.back{display:block;width:100%;height:auto;aspect-ratio:63/88;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.back .nm,.back .lab{font-family:"Fraunces","Mochiy Pop One",serif;font-weight:900;font-variation-settings:"SOFT" 100,"opsz" 144}
+.back .nm.jp{font-family:"Mochiy Pop One","Fraunces",sans-serif;font-weight:400}

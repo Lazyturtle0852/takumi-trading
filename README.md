@@ -76,8 +76,11 @@ Googleフォーム ──CSV──▶ AI（prompts/card-data.md） ──cards.j
 │   └── dummy_responses.csv   架空の回答（動作確認用）
 └── site/
     ├── index.html        ルール説明ページ
-    ├── print.html        印刷シート（A4に9枚・トンボ付き）
+    ├── print.html        印刷シート（表｜裏を並べて折る／両面印刷・トンボ付き）
+    ├── back.html         裏面デザインの一覧
     ├── card.css / card.js  カードのテンプレート（表示・印刷で共用）
+    ├── card-back.js      裏面（顔写真＋名前、柄×配色で全員ちがうデザイン）
+    ├── print-sheets.js   表｜裏の印刷シートの組み立て（print.html と試作ページで共用）
     ├── sample-cards.js   ダミーのカードデータ
     └── images/           タイトル画像・ダミーのイラスト
 ```

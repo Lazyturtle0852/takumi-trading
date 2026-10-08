@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>裏面デザイン一覧</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@144,900,100&family=Mochiy+Pop+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="card.css">
+<style>
+  body{margin:0;background:#2b2724;color:#f3ead8;font:14px/1.6 system-ui,sans-serif}
+  header{max-width:1100px;margin:0 auto;padding:24px 16px 8px}
+  h1{font-size:20px;margin:0 0 4px}
+  header p{margin:0;color:#c9bfae}
+  header a{color:#ffc700}
+  .grid{max-width:1100px;margin:0 auto;padding:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}
+  figure{margin:0}
+  figure .back{border-radius:6px;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+  figcaption{font-size:11px;color:#a89e8d;margin-top:4px;text-align:center}
+  .orig{max-width:1100px;margin:0 auto;padding:8px 16px 40px}
+  .orig img{width:min(420px,100%);display:block;border-radius:6px}
+</style>
+</head>
+<body>
+<header>
+  <h1>裏面デザイン一覧</h1>
+  <p>柄 × 配色で <b id="combos"></b> 通り。カードの並び順で割り当てるので、その数までは全員ちがうデザインになる。<code>?n=60</code> で表示枚数を変更。
+  印刷は <a href="print.html">print.html</a>。</p>
+</header>
+<div class="grid" id="grid"></div>
+<div class="orig"><p>見本（Canva）</p><img src="images/back/canva-original.png" alt="Canvaで作った裏面の見本9種"></div>
+<script src="card-back.js"></script>
+<script>
+const NAMES = ["NAME", "Ryoma", "たくみ", "Shimizu", "ゆうき", "Mika", "ハル", "Kenta", "そうちゃん", "Aoi", "グラフの魔術師", "Taro"];
+const n = +(new URLSearchParams(location.search).get("n") || 36);
+document.getElementById("combos").textContent = BACK_COMBOS;
+document.getElementById("grid").innerHTML = Array.from({ length: n }, (_, i) => {
+  const svg = renderBack({ name: NAMES[i % NAMES.length] }, i);
+  const m = svg.match(/data-pattern="(\w+)" data-palette="(\d+)"/);
+  return `<figure>${svg}<figcaption>#${i + 1} ${m[1]} / 配色${m[2]}</figcaption></figure>`;
+}).join("");
+</script>
+</body>
+</html>
