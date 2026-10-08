@@ -281,8 +281,6 @@ window.renderBack = function (c, index, layout) {
     <clipPath id="${id}o">${L.photoClip ? `<path d="${L.photoClip}"/>` : `<rect y="${L.photoTop}" width="${W}" height="${H}"/>`}</clipPath>
     <clipPath id="${id}e">${ellipse("")}</clipPath>
     <path id="${id}p" d="${namePath}"/>
-    <!-- 研究会ロゴの青〜水色（ロゴの明るいミントはクリームの帯の上で読みにくいので使わない） -->
-    <linearGradient id="${id}l" gradientUnits="userSpaceOnUse" x1="45" y1="0" x2="585" y2="0"><stop offset="0" stop-color="#26589e"/><stop offset=".55" stop-color="#0176a8"/><stop offset="1" stop-color="#2f9e98"/></linearGradient>
     ${fade ? `<linearGradient id="${id}f" gradientUnits="userSpaceOnUse" x1="0" y1="${f(fade[0])}" x2="0" y2="${f(fade[1])}"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff"/></linearGradient>
     <mask id="${id}m" maskUnits="userSpaceOnUse" x="0" y="0" width="${W}" height="${H}"><rect width="${W}" height="${H}" fill="url(#${id}f)"/></mask>` : ""}
     <filter id="${id}g" x="0" y="0" width="100%" height="100%">
@@ -298,9 +296,10 @@ window.renderBack = function (c, index, layout) {
     <g clip-path="url(#${id}e)">${img}${L.photoEdge ? `<path d="${L.photoEdge}" fill="none" stroke="#1a1a1a" stroke-width="2.4"/>` : ""}</g>
     ${ellipse(`fill="none" stroke="#1a1a1a" stroke-width="2.4"`)}
     <rect y="764" width="${W}" height="75" fill="#fdf3dc" opacity=".94"/>
+    <!-- 研究会ロゴの青 -->
     <g class="lab" text-anchor="middle" font-size="60">
       <text x="${W / 2 + 3}" y="823" fill="#14294d" textLength="540" lengthAdjust="spacingAndGlyphs">Shimizu Takumi Lab.</text>
-      <text x="${W / 2}" y="820" fill="url(#${id}l)" textLength="540" lengthAdjust="spacingAndGlyphs">Shimizu Takumi Lab.</text>
+      <text x="${W / 2}" y="820" fill="#0176a8" textLength="540" lengthAdjust="spacingAndGlyphs">Shimizu Takumi Lab.</text>
     </g>
     ${L.ribbon ? L.ribbon(size, jp) : ""}
     <g class="nm${jp ? " jp" : ""}" text-anchor="middle" font-size="${f(size)}"${L.sticker ? ` stroke="#fdf3dc" stroke-width="${f(size * .16)}" stroke-linejoin="round" paint-order="stroke"` : ""}>
