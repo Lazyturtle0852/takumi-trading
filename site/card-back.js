@@ -262,6 +262,8 @@ window.renderBack = function (c, index, layout) {
       // cover の案（名前が楕円の外）は顔を上に寄せてよいので、顔の中心が楕円の上端から110以上下にあれば足りる
       const room = L.cover ? (110 / ((fc.y + fc.h / 2) * ih)) : headroom;
       let s = Math.max(Math.min(target, Math.max(room, target * .7)), (rx1 - rx0) / iw, (ry1 - top) / ih);
+      // c.center：顔が写真の端に寄っていても楕円の真ん中に来るよう、そのぶん拡大する（隣の人を外に出す）
+      if (c.center) { const fx = fc.x + fc.w / 2; s = Math.max(s, (L.face.cx - rx0) / (fx * iw), (rx1 - L.face.cx) / ((1 - fx) * iw)); }
       let x = L.face.cx - (fc.x + fc.w / 2) * iw * s, y = L.face.cy - (fc.y + fc.h / 2) * ih * s;
       // 横と下は必ず埋める。上は顔の位置を優先し、写真が足りなければ楕円の色を見せて境目をぼかす
       x = Math.min(rx0, Math.max(rx1 - iw * s, x)); y = Math.max(ry1 - ih * s, y);
