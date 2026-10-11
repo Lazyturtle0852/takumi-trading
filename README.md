@@ -4,7 +4,7 @@
 
 ゼミ生全員の「強み」をカードにし、お題に合わせて3人のチームを編成して競う。勝つ鍵は**誰が何を得意としているかを知っていること**。チームインテリジェンスの「知識」の観点、つまりメンバー同士がお互いの強みを把握している状態を、遊びながらつくることがねらい。
 
-- ルール説明ページ: https://lazyturtle0852.github.io/takumi-trading/ （ソースは [`site/index.html`](site/index.html)）
+- アクティビティのページ: https://lazyturtle0852.github.io/takumi-trading/ （ホームは [`site/index.html`](site/index.html)、各アクティビティは `jinro.html` / `gesture.html` / `cards.html`）
 - ルール仕様: [`docs/rules.md`](docs/rules.md)
 - 事前フォームの設問: [`docs/form.md`](docs/form.md)
 - カードの仕様: [`docs/card-spec.md`](docs/card-spec.md)
@@ -75,7 +75,9 @@ Googleフォーム ──CSV──▶ AI（prompts/card-data.md） ──cards.j
 ├── examples/
 │   └── dummy_responses.csv   架空の回答（動作確認用）
 └── site/
-    ├── index.html        ルール説明ページ
+    ├── index.html        ホーム（3つのアクティビティへのリンクとスケジュール）
+    ├── jinro.html / gesture.html / cards.html  各アクティビティのページ（推論・注意力・資源）
+    ├── style.css         ページ共通のスタイル
     ├── print.html        印刷シート（表｜裏を並べて折る／両面印刷・トンボ付き）
     ├── back.html         裏面デザインの一覧
     ├── card.css / card.js  カードのテンプレート（表示・印刷で共用）
