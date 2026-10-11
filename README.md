@@ -4,7 +4,9 @@
 
 ゼミ生全員の「強み」をカードにし、お題に合わせて3人のチームを編成して競う。勝つ鍵は**誰が何を得意としているかを知っていること**。チームインテリジェンスの「知識」の観点、つまりメンバー同士がお互いの強みを把握している状態を、遊びながらつくることがねらい。
 
-- アクティビティのページ: https://lazyturtle0852.github.io/takumi-trading/ （ホームは [`site/index.html`](site/index.html)、各アクティビティは `jinro.html` / `gesture.html` / `cards.html`）
+- アクティビティのページ（公開版・ルール説明だけ）: https://lazyturtle0852.github.io/takumi-trading/
+- 運営版（お題ジェネレーター・準備物・未決事項つき）: https://lazyturtle0852.github.io/takumi-trading/staff/
+- どちらも [`tools/build_pages.py`](tools/build_pages.py) で生成する（HTMLを直接編集せず、スクリプトを直して `python3 tools/build_pages.py`）
 - ルール仕様: [`docs/rules.md`](docs/rules.md)
 - 事前フォームの設問: [`docs/form.md`](docs/form.md)
 - カードの仕様: [`docs/card-spec.md`](docs/card-spec.md)
@@ -72,12 +74,16 @@ Googleフォーム ──CSV──▶ AI（prompts/card-data.md） ──cards.j
 ├── prompts/
 │   ├── card-data.md      CSV → cards.json に変換するプロンプト
 │   └── illustration.md   写真なしの人のイラスト生成プロンプト
+├── tools/
+│   └── build_pages.py    site/ の公開版・運営版ページを生成
 ├── examples/
 │   └── dummy_responses.csv   架空の回答（動作確認用）
 └── site/
-    ├── index.html        ホーム（3つのアクティビティへのリンクとスケジュール）
-    ├── jinro.html / gesture.html / cards.html  各アクティビティのページ（推論・注意力・資源）
+    ├── index.html        ホーム（3つのアクティビティとタイムテーブル）※公開版
+    ├── jinro.html / gesture.html / cards.html  各アクティビティのページ（推論・注意力・資源）※公開版
+    ├── staff/            運営版（同じ4ページ＋お題ジェネレーターなど）
     ├── style.css         ページ共通のスタイル
+    ├── generator.js      運営版のお題ジェネレーター・順番シャッフル
     ├── print.html        印刷シート（表｜裏を並べて折る／両面印刷・トンボ付き）
     ├── back.html         裏面デザインの一覧
     ├── card.css / card.js  カードのテンプレート（表示・印刷で共用）
