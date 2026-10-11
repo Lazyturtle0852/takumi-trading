@@ -7,6 +7,7 @@
 //   items: ["…", "見出し｜補足"], 「｜」で区切ると2行目以降が小さく出る
 //   labels: ["多数派", "ズレ役"],  「｜」で区切った各部分に付けるラベル（任意）
 //   secret: true,              引いた直後は伏せておき、タップで表示（演者にだけ見せる用）
+//   secretNote: "…",           伏せているときの注記
 //   button: "お題を引く",
 // })
 (function () {
@@ -55,7 +56,7 @@
     function show() {
       if (current == null) { card.innerHTML = `<div class="gen-empty">ボタンを押して引く</div>`; return; }
       card.innerHTML = hidden
-        ? `<div class="gen-hidden">タップして表示<small>演者だけが見る</small></div>`
+        ? `<div class="gen-hidden">タップして表示<small>${esc(opt.secretNote || "演者だけが見る")}</small></div>`
         : render(current, opt.labels);
       card.classList.remove("spin"); void card.offsetWidth; card.classList.add("spin");
     }
@@ -92,6 +93,7 @@
       current = null; show(); refresh();
     });
     refresh();
+    return { current: () => current };
   };
 
   // チームA〜Dの順番をシャッフルする
@@ -120,5 +122,82 @@
       out.textContent = `${Math.floor(Math.random() * n) + 1} 番`;
       out.classList.remove("spin"); void out.offsetWidth; out.classList.add("spin");
     });
+  };
+
+  // 目的ズレ人狼の配布モード。端末を回して、1人ずつ自分の目的だけを見る。
+  // 画面には「あなたの目的」しか出さず、多数派／ズレ役の区別は表示しない。
+  // 答え（ズレ役の番号）は全員に配り終わってから、長押しでだけ見られる。
+  window.mountDeal = function (el, opt) {
+    el.classList.add("deal-setup");
+    el.innerHTML = `<label>人数 <input type="number" min="3" max="20" value="${opt.n || 4}"></label>
+      <button type="button" class="draw">配布をはじめる</button>
+      <p class="deal-msg"></p>`;
+    const msg = el.querySelector(".deal-msg");
+    let ov = null, st = null;
+
+    function start() {
+      const task = opt.task(), pair = opt.pair();
+      if (!task || !pair) { msg.textContent = "先に「課題を引く」と「ペアを引く」を押してください。"; return; }
+      const n = Math.max(3, +el.querySelector("input").value || 3);
+      st = { task, pair: pair.split("｜"), n, odd: Math.floor(Math.random() * n) + 1, i: 1, table: (st && st.task === task ? st.table + 1 : 1) };
+      msg.textContent = "";
+      ov = document.createElement("div");
+      ov.className = "deal";
+      document.body.appendChild(ov);
+      document.documentElement.style.overflow = "hidden";
+      pass();
+    }
+    function close() { ov.remove(); ov = null; document.documentElement.style.overflow = ""; }
+    function taskHtml() {
+      const t = st.task.split("｜");
+      return `<div class="deal-task"><span>課題</span>${esc(t[0])}${t[1] ? `<small>${esc(t[1])}</small>` : ""}</div>`;
+    }
+    function pass() {
+      ov.innerHTML = `<div class="deal-box">
+        <div class="deal-step">${st.i} ／ ${st.n}</div>
+        <div class="deal-big">${st.i}番の人へ</div>
+        <p>ほかの人は画面を見ないでください。<br>受け取ったらタップして、自分の目的を見る。</p>
+        <button type="button" class="draw deal-go">自分の目的を見る</button>
+      </div>`;
+      ov.querySelector(".deal-go").onclick = reveal;
+    }
+    function reveal() {
+      const goal = st.i === st.odd ? st.pair[1] : st.pair[0];
+      ov.innerHTML = `<div class="deal-box">
+        <div class="deal-step">${st.i}番の人</div>
+        ${taskHtml()}
+        <div class="deal-goal"><span>あなたの目的</span>${esc(goal)}</div>
+        <p>覚えたら隠して、次の人に渡す。目的は口に出さない。</p>
+        <button type="button" class="draw deal-go">${st.i < st.n ? "覚えた！隠して次の人へ" : "覚えた！隠す"}</button>
+      </div>`;
+      ov.querySelector(".deal-go").onclick = () => { if (st.i < st.n) { st.i++; pass(); } else done(); };
+    }
+    function done() {
+      ov.innerHTML = `<div class="deal-box">
+        <div class="deal-big">配り終わりました</div>
+        ${taskHtml()}
+        <p>議論スタート！ 最後に、誰の目的がズレているかを投票で当てる。</p>
+        <div class="deal-btns">
+          <button type="button" class="deal-ans">運営：答えを見る（長押し）</button>
+          <button type="button" class="deal-again">次の卓を配る</button>
+          <button type="button" class="deal-close">閉じる</button>
+        </div>
+        <div class="deal-answer" hidden></div>
+      </div>`;
+      const ans = ov.querySelector(".deal-answer");
+      let timer = null;
+      const hold = () => { timer = setTimeout(() => {
+        ans.hidden = false;
+        ans.innerHTML = `ズレ役は <b>${st.odd}番</b><br><small>多数派：${esc(st.pair[0])} ／ ズレ役：${esc(st.pair[1])}</small>`;
+      }, 800); };
+      const release = () => { clearTimeout(timer); };
+      const b = ov.querySelector(".deal-ans");
+      b.addEventListener("pointerdown", hold);
+      ["pointerup", "pointerleave", "pointercancel"].forEach(t => b.addEventListener(t, release));
+      b.addEventListener("contextmenu", e => e.preventDefault());
+      ov.querySelector(".deal-again").onclick = () => { close(); start(); };
+      ov.querySelector(".deal-close").onclick = close;
+    }
+    el.querySelector("button").addEventListener("click", start);
   };
 })();

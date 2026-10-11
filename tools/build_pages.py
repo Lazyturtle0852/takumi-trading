@@ -249,27 +249,23 @@ def build_jinro(staff):
     tail = ""
     open_items = []
     if staff:
-        body += '''<section id="pairs">
-  <div class="wrap">
-    <h2><span class="num"></span>目的のペア（運営メモ）</h2>
-    <p class="sub">ズレは大きすぎるとすぐバレ、小さすぎると誰も気づかない。運営で一度読み合わせて調整する。</p>
+        pairs_table = '''<details class="gen-edit" style="width:100%;margin-top:20px"><summary>運営メモ：目的ペアの一覧（参加者に見せない）</summary>
+    <p class="note">ズレは大きすぎるとすぐバレ、小さすぎると誰も気づかない。運営で一度読み合わせて調整する。</p>
     <div class="table-wrap"><table>
       <tr><th>多数派の目的</th><th>ズレ役の目的</th></tr>
-''' + "".join(f'      <tr><td class="name">{a}</td><td>{b}</td></tr>\n' for a, b in (x.split("｜") for x in JINRO_PAIR)) + '''    </table></div>
-  </div>
-</section>
-'''
-        body += tools_section("ジェネレーター", "課題は投影してよい。目的のペアとズレ役の番号は<b>投影しない</b>（運営の手元で見る）。",
-                              [("課題（投影OK）", "g-task"), ("目的のペア（投影しない）", "g-pair"), ("ズレ役の番号（投影しない）", "g-pick")])
-        body += prep_section(["共通の課題（ジェネレーターに入っている）", "目的カード（多数派用・ズレ役用 × 3〜4セット）。紙に書いて配る",
+''' + "".join(f'      <tr><td class="name">{a}</td><td>{b}</td></tr>\n' for a, b in (x.split("｜") for x in JINRO_PAIR)) + '''    </table></div></details>'''
+        body += tools_section("配布ツール", "①課題を引いて投影 → ②目的ペアを引く（伏せたまま。運営だけタップで確認）→ ③人数を入れて配布モード。<b>端末を順番に回すと、1人ずつ「あなたの目的」だけが表示される</b>。多数派／ズレ役の区別は画面に出ない。",
+                              [("① 課題（投影OK）", "g-task"), ("② 目的のペア（伏せてある）", "g-pair"), ("③ 配布モード（端末を回す）", "g-deal")],
+                              note="ズレ役は配布のたびにランダムで決まる。答えは全員に配り終わったあと、「運営：答えを見る」を長押しで表示。卓が複数あるときは「次の卓を配る」で、同じ課題・ペアのままズレ役だけ引き直す。" + pairs_table)
+        body += prep_section(["共通の課題（ジェネレーターに入っている）", "配布はこのページの配布モード（端末1台を回す）。予備に紙の目的カードも",
                               "運営で一度読み合わせて、ズレの幅を調整する"],
                              ["やり方：各チームの代表1人ずつで1卓を組んで全員で観るか、チーム内で番号を振って同じ番号同士で卓を組むか",
                               "得点のつけ方（ズレ役を当てたら？ ズレ役が逃げ切ったら？）",
                               "ゲーム18分の中の議論・投票の時間"])
         tail = ('<script src="{P}generator.js"></script>\n<script>\n'
-                f'mountGenerator(document.getElementById("g-task"), {{key:"jinro-task", items:{js_list(JINRO_TASK)}, button:"課題を引く"}});\n'
-                f'mountGenerator(document.getElementById("g-pair"), {{key:"jinro-pair", items:{js_list(JINRO_PAIR)}, labels:["多数派","ズレ役"], button:"ペアを引く"}});\n'
-                'mountPicker(document.getElementById("g-pick"), {n:4, button:"ズレ役を決める"});\n</script>\n')
+                f'const gTask = mountGenerator(document.getElementById("g-task"), {{key:"jinro-task", items:{js_list(JINRO_TASK)}, button:"課題を引く"}});\n'
+                f'const gPair = mountGenerator(document.getElementById("g-pair"), {{key:"jinro-pair", items:{js_list(JINRO_PAIR)}, labels:["多数派","ズレ役"], secret:true, secretNote:"運営だけが見る", button:"ペアを引く"}});\n'
+                'mountDeal(document.getElementById("g-deal"), {n:4, task: gTask.current, pair: gPair.current});\n</script>\n')
     page(staff, "jinro.html", "目的ズレ人狼", "SBC合宿アクティビティ① 推論：目的ズレ人狼", "jinro.jpg",
          "アクティビティ ① ／ 推論 ／ 0:10〜0:35", "目的ズレ人狼",
          "1人だけ、少し違うゴールを持っている。議論しながら、誰の目的がズレているかを見抜け。",

@@ -63,10 +63,13 @@
     </div>
   </div>
 </section>
-<section id="pairs">
+<section id="tools">
   <div class="wrap">
-    <h2><span class="num">02</span>目的のペア（運営メモ）</h2>
-    <p class="sub">ズレは大きすぎるとすぐバレ、小さすぎると誰も気づかない。運営で一度読み合わせて調整する。</p>
+    <h2><span class="num">02</span>配布ツール</h2>
+    <p class="sub">①課題を引いて投影 → ②目的ペアを引く（伏せたまま。運営だけタップで確認）→ ③人数を入れて配布モード。<b>端末を順番に回すと、1人ずつ「あなたの目的」だけが表示される</b>。多数派／ズレ役の区別は画面に出ない。</p>
+    <div class="tools"><div><h3>① 課題（投影OK）</h3><div id="g-task"></div></div><div><h3>② 目的のペア（伏せてある）</h3><div id="g-pair"></div></div><div><h3>③ 配布モード（端末を回す）</h3><div id="g-deal"></div></div></div>
+    <p class="note">ズレ役は配布のたびにランダムで決まる。答えは全員に配り終わったあと、「運営：答えを見る」を長押しで表示。卓が複数あるときは「次の卓を配る」で、同じ課題・ペアのままズレ役だけ引き直す。<details class="gen-edit" style="width:100%;margin-top:20px"><summary>運営メモ：目的ペアの一覧（参加者に見せない）</summary>
+    <p class="note">ズレは大きすぎるとすぐバレ、小さすぎると誰も気づかない。運営で一度読み合わせて調整する。</p>
     <div class="table-wrap"><table>
       <tr><th>多数派の目的</th><th>ズレ役の目的</th></tr>
       <tr><td class="name">満足度を最大化</td><td>コストを最小化</td></tr>
@@ -74,22 +77,14 @@
       <tr><td class="name">話題性を出す</td><td>失敗リスクを避ける</td></tr>
       <tr><td class="name">全員が納得して決める</td><td>とにかく早く決める</td></tr>
       <tr><td class="name">新しいことに挑戦する</td><td>確実にできることをやる</td></tr>
-    </table></div>
-  </div>
-</section>
-<section id="tools">
-  <div class="wrap">
-    <h2><span class="num">03</span>ジェネレーター</h2>
-    <p class="sub">課題は投影してよい。目的のペアとズレ役の番号は<b>投影しない</b>（運営の手元で見る）。</p>
-    <div class="tools"><div><h3>課題（投影OK）</h3><div id="g-task"></div></div><div><h3>目的のペア（投影しない）</h3><div id="g-pair"></div></div><div><h3>ズレ役の番号（投影しない）</h3><div id="g-pick"></div></div></div>
-    
+    </table></div></details></p>
   </div>
 </section>
 <section id="prep">
   <div class="wrap">
-    <h2><span class="num">04</span>準備物・未決事項</h2>
+    <h2><span class="num">03</span>準備物・未決事項</h2>
     <div class="grid g2">
-      <div class="panel"><h3>準備物</h3><ul class="check"><li>共通の課題（ジェネレーターに入っている）</li><li>目的カード（多数派用・ズレ役用 × 3〜4セット）。紙に書いて配る</li><li>運営で一度読み合わせて、ズレの幅を調整する</li></ul></div>
+      <div class="panel"><h3>準備物</h3><ul class="check"><li>共通の課題（ジェネレーターに入っている）</li><li>配布はこのページの配布モード（端末1台を回す）。予備に紙の目的カードも</li><li>運営で一度読み合わせて、ズレの幅を調整する</li></ul></div>
       <div class="panel"><h3>未決事項</h3><ul class="check open"><li>やり方：各チームの代表1人ずつで1卓を組んで全員で観るか、チーム内で番号を振って同じ番号同士で卓を組むか</li><li>得点のつけ方（ズレ役を当てたら？ ズレ役が逃げ切ったら？）</li><li>ゲーム18分の中の議論・投票の時間</li></ul></div>
     </div>
   </div>
@@ -101,9 +96,9 @@
 <footer>SBC合宿 2026 アクティビティ ── たくみ研 ／ v0.8（仮）（運営用）</footer>
 <script src="../generator.js"></script>
 <script>
-mountGenerator(document.getElementById("g-task"), {key:"jinro-task", items:["ゼミ合宿の企画を決めよう｜行き先・日程・やること","新入生歓迎会を企画しよう｜場所・内容・呼び込み方","大学生向けの新サービスを立ち上げよう｜何を作って、どう広めるか","ORFの展示ブースを考えよう｜見せ方・配るもの・当番","ゼミの年末パーティーを企画しよう｜会場・料理・出し物","研究室のWebサイトをリニューアルしよう｜載せる中身と見せ方"], button:"課題を引く"});
-mountGenerator(document.getElementById("g-pair"), {key:"jinro-pair", items:["満足度を最大化｜コストを最小化","参加人数を増やす｜1人ひとりの体験を深める","話題性を出す｜失敗リスクを避ける","全員が納得して決める｜とにかく早く決める","新しいことに挑戦する｜確実にできることをやる"], labels:["多数派","ズレ役"], button:"ペアを引く"});
-mountPicker(document.getElementById("g-pick"), {n:4, button:"ズレ役を決める"});
+const gTask = mountGenerator(document.getElementById("g-task"), {key:"jinro-task", items:["ゼミ合宿の企画を決めよう｜行き先・日程・やること","新入生歓迎会を企画しよう｜場所・内容・呼び込み方","大学生向けの新サービスを立ち上げよう｜何を作って、どう広めるか","ORFの展示ブースを考えよう｜見せ方・配るもの・当番","ゼミの年末パーティーを企画しよう｜会場・料理・出し物","研究室のWebサイトをリニューアルしよう｜載せる中身と見せ方"], button:"課題を引く"});
+const gPair = mountGenerator(document.getElementById("g-pair"), {key:"jinro-pair", items:["満足度を最大化｜コストを最小化","参加人数を増やす｜1人ひとりの体験を深める","話題性を出す｜失敗リスクを避ける","全員が納得して決める｜とにかく早く決める","新しいことに挑戦する｜確実にできることをやる"], labels:["多数派","ズレ役"], secret:true, secretNote:"運営だけが見る", button:"ペアを引く"});
+mountDeal(document.getElementById("g-deal"), {n:4, task: gTask.current, pair: gPair.current});
 </script>
 </body>
 </html>
